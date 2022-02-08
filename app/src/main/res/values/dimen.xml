@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Toolbar dimensions -->
+    <dimen name="item_radius">5dp</dimen>
+    <dimen name="tool_icon_margin">8dp</dimen>
+    <dimen name="tool_icon_size">24dp</dimen>
+    <dimen name="color_icon_size">28dp</dimen>
+    <dimen name="toolbar_margin">32dp</dimen>
+    <dimen name="toolbar_radius">10dp</dimen>
+    <dimen name="toolbar_padding">5dp</dimen>
+</resources>

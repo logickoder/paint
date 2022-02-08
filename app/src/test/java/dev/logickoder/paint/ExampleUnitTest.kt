@@ -1,4 +1,4 @@
-package com.jeffreyorazulike.paint
+package dev.logickoder.paint
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
