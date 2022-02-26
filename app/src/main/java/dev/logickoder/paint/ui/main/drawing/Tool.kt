@@ -80,7 +80,7 @@ fun Toolbar(modifier: Modifier = Modifier, color: (Color) -> Unit, tool: (Int) -
             Tools.mapIndexed { index, tool ->
                 Tool(
                     name = tool.first, image = tool.second,
-                    selected = selected == index, onClick = { updateTool(tool, index) })
+                    selected = selected == index, onClick = { (::updateTool)(tool, index) })
             }
         }
         Spacer(
