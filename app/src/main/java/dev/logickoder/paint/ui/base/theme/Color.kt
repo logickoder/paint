@@ -2,7 +2,6 @@ package dev.logickoder.paint.ui.base.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple200 = Color(0xFFBB86FC)
-val Purple500 = Color(0xFF6200EE)
-val Purple700 = Color(0xFF3700B3)
-val Teal200 = Color(0xFF03DAC5)
+val Toolbar = Color(0xFFF4F4F4)
+val Tool = Color(0xFF747474)
+val SelectedTool = Color(0xFFe4e4e4)

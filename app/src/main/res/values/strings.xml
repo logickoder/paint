@@ -1,10 +1,3 @@
 <resources>
     <string name="app_name">Paint</string>
-    <string name="undo">Undo</string>
-    <string name="save">Save</string>
-    <string name="select_color">Select Color</string>
-    <string name="stroke_size">Stroke Size</string>
-    <string name="tool_image_description">The image of the tool</string>
-    <string name="title_activity_main2">MainActivity2</string>
-    <string name="title_activity_main">MainActivity</string>
 </resources>

@@ -7,7 +7,6 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
         <item name="android:windowLightStatusBar">true</item>
-        <!-- Customize your theme here. -->
     </style>
 
     <style name="Theme.Paint.NoActionBar">
@@ -18,14 +17,4 @@
     <style name="Theme.Paint.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Paint.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-    <!-- Toolbar Styles -->
-    <style name="Toolbar">
-        <item name="android:background">@color/toolbar</item>
-        <item name="android:radius">@dimen/toolbar_radius</item>
-    </style>
-
-    <style name="Item">
-        <item name="tint">@color/item</item>
-    </style>
 </resources>

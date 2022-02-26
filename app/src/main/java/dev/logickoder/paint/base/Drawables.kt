@@ -1,56 +1,55 @@
 package dev.logickoder.paint.base
 
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.Path
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.PathFillType
+import androidx.compose.ui.graphics.drawscope.DrawScope
+import dev.logickoder.paint.utils.pos
+import dev.logickoder.paint.utils.size
 import kotlin.math.PI
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.sin
 
 class Pencil(properties: DrawableProperties) : Drawable(properties) {
-    override var end: Point = start.x cord start.y
+    private val path = Path()
+    override var end: Offset = start.x pos start.y
         set(value) {
-            stroke.path.quadTo(end.x, end.y, (end.x + value.x) / 2, (end.y + value.y) / 2)
-            stroke.path.lineTo(value.x, value.y)
+            path.quadraticBezierTo(
+                end.x, end.y,
+                ((end.x + value.x) / 2), ((end.y + value.y) / 2)
+            )
+            path.lineTo(value.x, value.y)
             field = value
         }
 
     init {
-        stroke.path.moveTo(start.x, start.y)
+        path.moveTo(start.x, start.y)
     }
 
-    override fun draw(canvas: Canvas, paint: Paint) {
-        // iterate over each stroke and draw it on the canvas
-        paint.apply {
-            strokeWidth = stroke.strokeWidth
-            color = this@Pencil.color
-        }
-        canvas.drawPath(stroke.path, paint)
+    override fun draw(scope: DrawScope) {
+        scope.drawPath(path, color, style = stroke)
     }
 }
 
 open class Line(properties: DrawableProperties) : Drawable(properties) {
 
-    override fun draw(canvas: Canvas, paint: Paint) {
-        canvas.drawLine(start.x, start.y, end.x, end.y, paint.apply {
-            strokeWidth = stroke.strokeWidth
-            color = this@Line.color
-        })
+    override fun draw(scope: DrawScope) {
+        scope.drawLine(color, start, end, stroke.width, stroke.cap, stroke.pathEffect)
     }
 }
 
 class Arrow(properties: DrawableProperties) : Line(properties) {
 
-    override fun draw(canvas: Canvas, paint: Paint) {
+    override fun draw(scope: DrawScope) {
         // calls the super method to draw the line
-        super.draw(canvas, paint)
+        super.draw(scope)
         // draw the arrow head
         val (radius, angle) = 30f to 60f
         val angleInRad = PI * angle / 180f
         val lineAngle = atan2(end.y - start.y, end.x - start.x)
-        val path = Path().apply {
-            fillType = Path.FillType.EVEN_ODD
+        scope.drawPath(Path().apply {
+            fillType = PathFillType.EvenOdd
             moveTo(end.x, end.y)
             lineTo(
                 (end.x - radius * cos(lineAngle - (angleInRad / 2))).toFloat(),
@@ -61,27 +60,20 @@ class Arrow(properties: DrawableProperties) : Line(properties) {
                 (end.x - radius * cos(lineAngle + (angleInRad / 2))).toFloat(),
                 (end.y - radius * sin(lineAngle + (angleInRad / 2))).toFloat(),
             )
-        }
-        canvas.drawPath(path, paint)
+        }, color, style = stroke)
     }
 }
 
 class Rectangle(properties: DrawableProperties) : Drawable(properties) {
 
-    override fun draw(canvas: Canvas, paint: Paint) {
-        canvas.drawRect(start.x, start.y, end.x, end.y, paint.apply {
-            strokeWidth = stroke.strokeWidth
-            color = this@Rectangle.color
-        })
+    override fun draw(scope: DrawScope) {
+        scope.drawRect(color, start, (end - start).size(), style = stroke)
     }
 }
 
 class Oval(properties: DrawableProperties) : Drawable(properties) {
 
-    override fun draw(canvas: Canvas, paint: Paint) {
-        canvas.drawOval(start.x, start.y, end.x, end.y, paint.apply {
-            strokeWidth = stroke.strokeWidth
-            color = this@Oval.color
-        })
+    override fun draw(scope: DrawScope) {
+        scope.drawOval(color, start, (end - start).size(), style = stroke)
     }
 }
